@@ -1,39 +1,64 @@
 import java.util.Scanner;
+public class Main {
+	public static void main(String[] args) {
+		Scanner scnr = new Scanner(System.in);//initialize scanner
+		int rate;
+		int sum=0, count=0;
+		int oneStar=0, twoStar=0, threeStar=0,fourStar=0, fiveStar=0;
+		boolean flag=true;
 
-public class CustomerSurvey {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+		System.out.println("Input a rating from 1-5 or input '-1' to end: ");
 
-        // TODO: Declare necessary variables (e.g., to hold rating counts, total number of ratings, sum, etc.)
-        // TODO: Declare a flag for detecting if any 5-star rating was entered
 
-        System.out.println("Welcome to Customer Survey! Enter ratings from 1 to 5 (enter -1 to stop):");
+		while (flag) { //while loop to keep collecting ratings
+			rate = scnr.nextInt();
 
-        // Sentinel-Controlled Loop to collect customer ratings
-        while (true) {
-            // TODO: Prompt user to enter a rating
-            // TODO: Read the rating input
+			if(rate == -1) {//set flag check for sentinel
+				rate=0;
+				flag = false;//ends initial while loop
 
-            // TODO: Check if the sentinel value (-1) was entered, and break if true
+			}
+			else if (rate<1 || rate>5) {//check for invalid numbers outside of (1-5) range
+				System.out.println("Invalid input, input a rating from 1-5 or input '-1' to end: ");
+			}
 
-            // TODO: Validate that the rating is between 1 and 5
-            // If invalid, display an error message and continue to the next iteration
+			else {
+				if (rate==5) { //flag check for '5' input for special output
+					fiveStar++;
+					count++;
+					System.out.println("Excellent rating received!");//Special output
+				}
+				switch (rate) {//execution for all other ratings within range
+				case 1:
+					oneStar++;
+					count++;
+					break;
+				case 2:
+					twoStar++;
+					count++;
+					break;
+				case 3:
+					threeStar++;
+					count++;
+					break;
+				case 4:
+					fourStar++;
+					count++;
+					break;
+				}
+				sum+=rate;
+				System.out.println("Input next rating 1-5 or input '-1' to end: ");
+			}
 
-            // TODO: Process valid rating: 
-            // - Update counters for each rating
-            // - Add rating to the total for average calculation
-            // - If rating is 5, set the flag to indicate a 5-star rating was received
-        }
+		}
+		float average = (float)sum/(float)count;//type-cast to calculate the average
+		System.out.println("You recived '" + count + "' ratings.");
+		System.out.println("You received '" + oneStar + "' 1-star ratings");
+		System.out.println("You received '" + twoStar + "' 2-star ratings");
+		System.out.println("You received '" + threeStar + "' 3-star ratings");
+		System.out.println("You received '" + fourStar + "' 4-star ratings");
+		System.out.println("You received '" + fiveStar + "' 5-star ratings");
+		System.out.println("Your average rating is " + average + " stars.");
 
-        // Summary Report
-        System.out.println("\nSummary Report:");
-        
-        // TODO: Display the total number of ratings
-
-        // TODO: Calculate and display the average rating, if any ratings were entered
-
-        // TODO: Display the count for each rating (1-star to 5-star) without using arrays
-
-        scanner.close(); // Close the scanner
-    }
+	}
 }
